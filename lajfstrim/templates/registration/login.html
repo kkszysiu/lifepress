@@ -1,0 +1,41 @@
+{% load gravatar %}
+{% load smart_if %}
+{% load i18n %}
+
+{% block title %}
+	{{site_name}} - Login
+{% endblock %}
+
+{% block meta %}
+
+{% endblock %}
+
+{% block site_name %}
+	{{site_name}} - Home
+{% endblock %}
+
+{% load i18n %}
+{% block content %}
+{% trans "As a registered user you will have full access to comments and forum. Registration isn't however required to browse this site content." %}
+<ul>
+<li>{% trans "If you are a new user you can" %} <a href="/user/register/"><b>{% trans "register" %}</b></a> {% trans "using a simple form" %}.</li>
+<!--<li>{% trans "If you forgotten your password, then you can" %} <a href="/user/password_reset/"><b>{% trans "reset it" %}</b></a>.</li>-->
+</ul>
+
+{% if form.errors %}
+<div class="errmsg">{% trans "Your username and password didn't match. Please try again." %}</div>
+{% endif %}
+
+<form method="post" action="/login/">
+<table>
+<tr><th colspan="2">{% trans "Standard login" %}</th></tr>
+<tr><td style="width:30%;"><label for="id_username">{% trans "Username" %}:</label></td><td>{{ form.username }}</td></tr>
+<tr><td><label for="id_password">{% trans "Password" %}:</label></td><td>{{ form.password }}</td></tr>
+<tr><td></td><td><input type="submit" value="{% trans "Login" %}"></td></tr>
+</table>
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+<br />
+
+{% endblock %}
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="/user/">{% trans "User Panel" %}</a>{% endblock %}

@@ -1,0 +1,163 @@
+{% extends "base_template.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load smart_if %}
+{% load truncate_chars %}
+
+{% block meta %}
+<script src="{{ MEDIA_URL }}js/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.timers.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/mbTooltip.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/timeline.css" media="screen">
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/mbTooltip.css" media="screen">
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#timeline').mousedown(function (event) {
+            $(this)
+                .data('down', true)
+                .data('x', event.clientX)
+                .data('scrollLeft', this.scrollLeft);
+
+            return false;
+        }).mouseup(function (event) {
+            $(this).data('down', false);
+        }).mousemove(function (event) {
+            if ($(this).data('down') == true) {
+                this.scrollLeft = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+            }
+        }).mousewheel(function (event, delta) {
+            this.scrollLeft -= (delta * 30);
+        }).css({
+            'overflow' : 'hidden',
+            'cursor' : '-moz-grab'
+        });
+    });
+
+    $(window).mouseout(function (event) {
+        if ($('#timeline').data('down')) {
+            try {
+                if (event.originalTarget.nodeName == 'BODY' || event.originalTarget.nodeName == 'HTML') {
+                    $('#timeline').data('down', false);
+                }
+            } catch (e) {}
+        }
+    });
+
+  $(function(){
+    $(".tl-events ul li a [title]").mbTooltip({ // also $([domElement]).mbTooltip  >>  in this case only children element are involved
+      opacity : .97,       //opacity
+      wait:300,           //before show
+      cssClass:"default",  // default = default
+      timePerWord:70,      //time to show in milliseconds per word
+      hasArrow:true,			// if you whant a little arrow on the corner
+      hasShadow:false,
+      imgPath:"{{ MEDIA_URL }}site_images/",
+      ancor:"mouse", //"parent"  you can ancor the tooltip to the mouse position or at the bottom of the element
+      shadowColor:"black", //the color of the shadow
+      mb_fade:100 //the time to fade-in
+    });
+  });
+</script>
+{% endblock %}
+
+{% block title %}Lifestream by {{ owner.username }}{% endblock %}
+{% block title2 %}<div class="user_h1">Lifestream by <a href="/user/{{ owner.username }}/">{{ owner.username }}</a></div>{% endblock %}
+
+<div class="container">
+{% block item_container %}
+    {% if items %}
+    <div id="timeline">
+        <ul class="tl-events">
+            <li class="welcome">
+                <h2>Hello!</h2>
+                <p>Travel through time by dragging the timeline or the slider below. Mouse over on any event to see more information.</p>
+
+            </li>
+        {% for day, item in items.items %}
+            <li class="first last">
+                <h3><a href="#{{ day }}-doodle">day {{ day }}</a></h3>
+                <ul class="column">
+                    {% for post in item %}
+                        {% if post.type != 'friend' %}
+                        <li class="milestone" id="event-{{ post.date.year }}-{{ post.date.month }}-{{ post.date.day }}-{{ post.date.id }}">
+                            <a href="#{{ post.date.year }}-{{ post.date.month }}-{{ post.date.day }}-{{ post.date.id }}" hidefocus="">
+                                <span title="{%if post.type == 'feed' %}<p>{{ post.title }}</p>{% endif %}{{ post.body }}" class="tl-icon"/>
+                                <span class="tl-msg">
+                                    <span class="tl-msg-inside">{%if post.type == 'blip' or post.type == 'twitter' or post.type == 'identica' %}{{ post.body|escape|removetags:"div img p a span"|truncate_chars:50}}{% else %}{{ post.title|truncate_chars:50}}{% endif %}</span>
+                                </span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+        <div class="msg"><p>{% trans "This user have no any activities for now." %}</p></div>
+    {% endif %}
+{% endblock %}
+</div>
+
+{% block nav_container %}
+    <div class="nano_container">
+        <div style="margin: 2px;">
+            <a href="/user/{{ owner.username }}/" class="button2{% if view_type == 'both' %} selected{% endif %}">both</a>
+            <a href="/user/{{ owner.username }}/my/" class="button2{% if view_type == 'my' %} selected{% endif %}">{% if user.username == owner.username %}my timeline{% else %}user timeline{% endif %}</a>
+            <a href="/user/{{ owner.username }}/friends/" class="button2{% if view_type == 'friends' %} selected{% endif %}">{% if user.username == owner.username %}my friends timeline{% else %}his friends timeline{% endif %}</a>
+        </div>
+        <div style="margin: 2px; margin-top: 10px;">
+            <a href="/user/{{ owner.username }}/list/" class="button2">list</a>
+            <a href="/user/{{ owner.username }}/timeline/" class="button2">timeline</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="small_container">
+        <h2>{% trans "About me" %}</h2>
+        {% gravatar owner 32 %}{{ about_owner }}
+        <div style="clear:both;"></div>
+    </div>
+
+    {%if user.is_authenticated %}
+        {%if user.username != owner.username %}
+        <div class="nano_container">
+            {% if is_friend != 1 %}
+            <form id="add_friend" action="/user/{{ owner.username }}/add_friend/" method="get">
+                <input id="add_to_friends" class="button" type="submit" value="{% trans "add to friends" %}" name="add_to_friends"/>
+            </form>
+            {% else %}
+            <form id="remove_friend" action="/user/{{ owner.username }}/remove_friend/" method="get">
+                <input id="remove_from_friends" class="button" type="submit" value="{% trans "remove friend" %}" name="remove_from_friends"/>
+            </form>
+            {% endif %}
+            <div style="clear:both;"></div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    {% if people_who_adds_you %}
+    <div class="small_container">
+        <h2>People that added {% if owner.username == user.username %}You{% else %}{{ owner.username }}{% endif %}</h2>
+        <div style="margin: 0; padding: 0; text-align: center;">
+        {% for pway in people_who_adds_you %}
+            <a href="/user/{{ paby.friend.username }}/">{% gravatar pway.user %}</a>
+        {% endfor %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {% endif %}
+
+    {% if people_added_by_you %}
+    <div class="small_container">
+        <h2>People added by {% if owner.username == user.username %}You{% else %}{{ owner.username }}{% endif %}</h2>
+        <div style="margin: 0; padding: 0; text-align: center;">
+            {% for paby in people_added_by_you %}
+                <a href="/user/{{ paby.friend.username }}/">{% gravatar paby.friend 32 %}</a>
+            {% endfor %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {% endif %}
+{% endblock %}

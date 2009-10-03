@@ -1,0 +1,111 @@
+{% extends "base_template.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load smart_if %}
+{% load blipify %}
+
+{% block meta %}
+<!--
+<script src="{{ MEDIA_URL }}js/jquery-impromptu.2.7.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/impromptu.css" media="screen">
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.comment_link').click(function () {
+        $.prompt();
+        return false;
+    });
+});
+</script>
+-->
+{% endblock %}
+
+{% block title %}Lifestream by {{ owner.username }}{% endblock %}
+{% block title2 %}<div class="user_h1">Lifestream by <a href="/user/{{ owner.username }}/">{{ owner.username }}</a></div>{% endblock %}
+
+{% block item_container %}
+        <ul class="column">
+            {% if item.type == 'blip' or item.type == 'twitter' or item.type == 'identica' or item.type == 'feed' %}
+            <li class="{{ item.type }}_{{ item.id }}">
+                <div class="block">
+                    <img src="{{ MEDIA_URL }}site_images/icons/{{ item.type }}.png" style="float:left; margin-right: 3px; width: 16px; height: 16px;"/><h2>{% if item.type == 'blip' %}Blip.pl{% endif %}{% if item.type == 'twitter' %}Twitter{% endif %}{% if item.type == 'identica' %}Identi.ca{% endif %}{% if item.title %}{{ item.title }}{% endif %} <small>{% trans "by" %}</small> <a href="/user/{{ item.user.username }}/">{{ item.user.username }}</a> <a style="float:right; cursor: pointer;" title="{{ item.date|timesince }}">{{ item.date }}</a></h2>
+                    <div id="content_view_{{ item.type }}_{{ item.id }}">
+                        <div id="{{ item.type }}_{{ item.id }}_huh">
+                            <div class="content">                                
+                                <p>{% if item.type == 'blip' or item.type == 'twitter' or item.type == 'identica' %}{{ item.body|blipify|safe|urlize }}{% else %}{{ item.body|safe|urlize }}{% endif %}</p>
+                                <div style="clear: both; float: none;"></div>
+                                <div style="float: right;"><a href="{{ item.link }}" title="{{ item.link }}">{% trans "permalink" %}</a></div>
+                                <div style="clear: both; float: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endif %}
+        </ul>
+
+        <div class="normal_block">
+            <div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/lajfstrim/embed.js"></script><noscript><a href="http://lajfstrim.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+{% endblock %}
+
+{% block nav_container %}
+    <div class="nano_container">
+        <div style="margin: 2px;">
+            <a href="/user/{{ owner.username }}/" class="button2{% if view_type == 'both' %} selected{% endif %}">both</a>
+            <a href="/user/{{ owner.username }}/my/" class="button2{% if view_type == 'my' %} selected{% endif %}">{% if user.username == owner.username %}my timeline{% else %}user timeline{% endif %}</a>
+            <a href="/user/{{ owner.username }}/friends/" class="button2{% if view_type == 'friends' %} selected{% endif %}">{% if user.username == owner.username %}my friends timeline{% else %}his friends timeline{% endif %}</a>
+        </div>
+        <div style="margin: 2px; margin-top: 10px;">
+            <a href="/user/{{ owner.username }}/list/" class="button2">list</a>
+            <a href="/user/{{ owner.username }}/timeline/" class="button2">timeline</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="small_container">
+        <h2>{% trans "About me" %}</h2>
+        {% gravatar owner 32 %}{{ about_owner }}
+        <div style="clear:both;"></div>
+    </div>
+
+    {%if user.is_authenticated %}
+        {%if user.username != owner.username %}
+        <div class="nano_container">
+            {% if is_friend != 1 %}
+            <form id="add_friend" action="/user/{{ owner.username }}/add_friend/" method="get">
+                <input id="add_to_friends" class="button" type="submit" value="{% trans "add to friends" %}" name="add_to_friends"/>
+            </form>
+            {% else %}
+            <form id="remove_friend" action="/user/{{ owner.username }}/remove_friend/" method="get">
+                <input id="remove_from_friends" class="button" type="submit" value="{% trans "remove friend" %}" name="remove_from_friends"/>
+            </form>
+            {% endif %}
+            <div style="clear:both;"></div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    {% if people_who_adds_you %}
+    <div class="small_container">
+        <h2>People that added {% if owner.username == user.username %}You{% else %}{{ owner.username }}{% endif %}</h2>
+        <div style="margin: 0; padding: 0; text-align: center;">
+        {% for pway in people_who_adds_you %}
+            <a href="/user/{{ paby.friend.username }}/">{% gravatar pway.user %}</a>
+        {% endfor %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {% endif %}
+
+    {% if people_added_by_you %}
+    <div class="small_container">
+        <h2>People added by {% if owner.username == user.username %}You{% else %}{{ owner.username }}{% endif %}</h2>
+        <div style="margin: 0; padding: 0; text-align: center;">
+            {% for paby in people_added_by_you %}
+                <a href="/user/{{ paby.friend.username }}/">{% gravatar paby.friend 32 %}</a>
+            {% endfor %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {% endif %}
+{% endblock %}

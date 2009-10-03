@@ -1,0 +1,60 @@
+{% extends "base_template.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load smart_if %}
+
+{% block title %}{% trans "Lifestream by" %} {{ user.username }} - {% trans "User Panel" %}{% endblock %}
+{% block title2 %}<div class="user_h1">{% trans "Lifestream by" %} <a href="/user/{{ user.username }}/">{{ user.username }}</a></div>{% endblock %}
+
+{% block user_info %}
+    {% if user.is_authenticated %}
+    <div id="user_info">
+        {% trans "Logged in as" %} <strong><a href="/user/{{ user.username }}/">{{ user.username }}</a></strong>.
+        &nbsp;[<a href="/user_panel/">{% trans "edit" %}</a>]
+        &nbsp;[<a href="/logout/">{% trans "logout" %}</a>]
+    </div>
+    <div style="margin-top: 5px; float: right; padding: 1px; background: #FFFFFF;">{% gravatar user 32 %}</div>
+    {% else %}
+    <div id="user_info">
+        [<a href="/login/">{% trans "login" %}</a>] [<a href="/registration/">{% trans "register" %}</a>]
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block item_container %}
+            <li class="admin_1">
+                <div class="block">
+                    <div class="content">
+                        <div style="margin: 10px; text-align: center; margin-bottom:20px;">
+                            <a href="/user_panel/add_feed/" class="button2">add new feed</a>
+                            <a href="/user_panel/feeds/" class="button2">feeds management</a>
+                            <a href="/user_panel/add_site/" class="button2">add new site</a>
+                            <a href="/user_panel/sites/" class="button2">sites management</a>
+                            <a href="/user_panel/user/" class="button2">user management</a>
+                        </div>
+                        <div style="clear: both; float: none;"></div>
+                    </div>
+                </div>
+            </li>
+            <li class="admin_2">
+                <div class="block">
+                    <div class="content">
+                        <div style="margin: 10px; text-align: center; margin-bottom:20px;">
+                            {% for item in items %}
+                            <a href="/user_panel/edit_{{ type }}/{{ item.id }}/" class="button2">{% if type == 'site' %}{{ item.username }} - {{ item.site }}{% else %}{{ item.name }} - {{ item.link }}{% endif %}</a>
+                            {% endfor %}
+                        </div>
+                        <div style="clear: both; float: none;"></div>
+                    </div>
+                </div>
+            </li>
+{% endblock %}
+
+{% block nav_container %}
+
+    <div class="small_container">
+        <h2>{% trans "About me" %}</h2>
+        {% gravatar user 32 %}{{ about_user }}
+        <div style="clear:both;"></div>
+    </div>
+{% endblock %}

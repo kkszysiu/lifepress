@@ -1,0 +1,370 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    color:#777777;
+    background-color:#F9F9F9;
+}
+
+img { border: 0; padding: 0; margin: 0; }
+a { color: #21759B; text-decoration: none; }
+* { margin: 0; padding: 0; }
+h1,h2{ font-weight: normal; }
+
+#user_info a {
+    color: #7AB7D5;
+}
+
+.user_h1 a {
+    color: #7AB7D5;
+}
+
+/* SOME FORMATTING */
+blockquote {
+	padding: 5px;
+	margin-bottom: 5px;
+	border: 1px solid #e5e5e5;
+	background: #fbfbfb;
+}
+
+.user_picture {
+    text-align: center;
+}
+
+.user_picture img {
+    margin: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #e5e5e5;
+    background: #fbfbfb;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border: 1px solid #e5e5e5;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -khtml-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+}
+
+h1 {
+    font-size: 2em;
+    padding: 10px 5%;
+    margin: 0 auto;
+    background: #2b221b;
+    line-height: 1em;
+    color: #777777;
+    border-bottom: 1px solid #1b140e;
+}
+
+#add_widget {
+    float: right;
+    margin: 5px 20px;
+    opacity: 0.5;
+    -moz-border-radius-bottomleft: 8px;
+    -webkit-border-radius-bottomleft: 8px;
+    -khtml-border-radius-bottomleft: 8px;
+    border-radius-bottomleft: 8px;
+}
+
+#user_info {
+    color: #FFFFFF;
+    float: right;
+    margin: 15px;
+    -moz-border-radius-bottomleft: 8px;
+    -webkit-border-radius-bottomleft: 8px;
+    -khtml-border-radius-bottomleft: 8px;
+    border-radius-bottomleft: 8px;
+}
+
+#add_widget img {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.container {
+    float:left;
+    display: inline block;
+    width: 70%;
+    padding: 10px 8px;
+    text-shadow:0 1px 2px #DEDEDE;
+}
+
+ul.column{
+    width: 100%;
+    padding: 0;
+    margin: 10px 0 50px;
+    list-style: none;
+}
+
+ul.column li {
+    padding: 0;
+    margin: 0;
+    margin: 5px 0;
+    display: inline;
+}
+
+.block {
+    font-size: 11px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 16px;
+    padding: 10px;
+    background: #FFFFFF;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border: 1px solid #e5e5e5;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -khtml-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+}
+
+.block h2 {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    text-shadow:0 2px 2px #BDBDBD;
+    border-bottom: 1px dotted;
+}
+
+.block h2 a {
+    font-size: 0.8em;
+}
+
+.block h2 img {
+    opacity: 0.5;
+    float: right;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: inline;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+
+.content_image img {
+    width: 32px;
+    height: 32px;
+    float: left;
+    margin: 2px;
+    padding: 2px;
+    margin-right: 6px;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -webkit-box-shadow: rgba(200,200,200,1) 0 4px 10px;
+    -khtml-box-shadow: rgba(200,200,200,1) 0 4px 10px;
+    box-shadow: rgba(200,200,200,1) 0 4px 10px;
+}
+
+.container2 {
+    display: block;
+    padding: 10px;
+    background: #2B221B;
+    float:right;
+    width:25%;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-radius-bottomleft: 10px;
+    -khtml-border-radius-bottomleft: 10px;
+    -o-border-radius-bottomleft: 10px;
+    border-radius-bottomleft: 10px;
+    text-shadow:0 1px 2px #DEDEDE;
+}
+
+.container2 .small_container {
+    font-size: 11px;
+    padding: 4px;
+    margin-bottom: 16px;
+    background: #fbfbfb;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.container2 .nano_container {
+    text-align: center;
+    padding: 4px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    background: #fbfbfb;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.container2 .small_container img {
+    width: 32px;
+    height: 32px;
+    float: left;
+    margin: 2px;
+    padding: 2px;
+    margin-right: 6px;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -khtml-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+}
+
+.container2 .small_container h2 {
+    color: #21759B;
+    font-size: 13px;
+    padding: 4px;
+}
+
+#footer {
+    padding: 2px;
+    background: #fbfbfb;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.msg {
+    background-color:#FFFFE0;
+    border-color:#E6DB55;
+    border-width: 1px;
+    border-style: solid;
+    padding: 12px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -khtml-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+}
+
+.pagination {
+    margin-top: 15px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #e5e5e5;
+    padding: 4px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -khtml-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+}
+
+.normal_block {
+    margin-top: 10px;
+    background: #FFFFFF;
+    border: 1px solid #e5e5e5;
+    padding: 15px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    -khtml-box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+    box-shadow: rgba(200,200,200,0.7) 0 1px 8px;
+}
+
+.button {
+    font-size: 10px;
+    text-decoration: none;
+    padding: 2px 8px !important;
+    margin: 2px;
+    cursor: pointer;
+    border: 1px solid #bbb;
+    -moz-border-radius: 11px;
+    -khtml-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    border-radius: 11px;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -khtml-box-sizing: content-box;
+    box-sizing: content-box;
+    color: #464646;
+    text-shadow: rgba(255,255,255,1) 0 1px 0;
+    background: #f2f2f2 url(../site_images/white-grad.png) repeat-x scroll left top;
+}
+
+.button:active {
+    background: #eee url(../site_images/white-grad.png) repeat-x scroll left bottom;
+}
+
+.button:hover {
+    border-color:#666666;
+    color:#000000;
+}
+
+.button2 {
+    font-size: 10px;
+    text-decoration: none;
+    padding: 2px 8px !important;
+    margin: 2px;
+    cursor: pointer;
+    border: 1px solid #bbb;
+    -moz-border-radius: 11px;
+    -khtml-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    border-radius: 11px;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -khtml-box-sizing: content-box;
+    box-sizing: content-box;
+    color: #464646;
+    text-shadow: rgba(255,255,255,1) 0 1px 0;
+    background: #f2f2f2 url(../site_images/white-grad.png) repeat-x scroll left top;
+}
+
+.button2:active {
+    background: #eee url(../site_images/white-grad.png) repeat-x scroll left bottom;
+}
+
+.button2:hover {
+    border-color:#21759B;
+    color:#000000;
+}
+
+.selected {
+    border-color:#21759B;
+    color:#D54E21;
+}
+
+.selected:hover {
+    color:#D54E21;
+}
+
+/* ADMIN FORM FORMATTING */
+.admin_form {
+    width: 250px;
+    padding: 6px;
+    margin: 0;
+}
+.admin_form label {
+    text-align: left;
+    padding: 6px;
+    margin: 0;
+}
+
+.admin_form input {
+    padding: 3px;
+    margin-top: 2px;
+    margin-right: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #e5e5e5;
+    background: #fbfbfb;
+}
+
+.admin_form textarea {
+    padding: 3px;
+    margin-top: 2px;
+    margin-right: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #e5e5e5;
+    background: #fbfbfb;
+}

@@ -1,0 +1,29 @@
+{% load i18n %}
+{% block content %}
+<h2>{% trans "Register" %}</h2>
+<form action="." method="post">
+          <table>
+            <tr>
+              <td style="width:35%;">{% trans "Login" %}</td>
+              <td>{{ form.login }}{% if form.login.errors %}<div class="errmsg">{{ form.login.errors|join:", " }}</div>{% endif %}</td>
+            </tr>
+            <tr>
+              <td>{% trans "Password" %}</td>
+              <td>{{ form.password1 }}{% if form.password1.errors %}<div class="errmsg">{{ form.password1.errors|join:", " }}</div>{% endif %}</td>
+            </tr>
+            <tr>
+              <td>{% trans "Password Again" %}</td>
+              <td>{{ form.password2 }}{% if form.password2.errors %}<div class="errmsg">{{ form.password2.errors|join:", " }}</div>{% endif %}</td>
+            </tr>
+            <tr>
+              <td>{% trans "Email" %}</td>
+              <td>{{ form.email }}{% if form.email.errors %}<div class="errmsg">{{ form.email.errors|join:", " }}</div>{% endif %}</td>
+            </tr>
+            <tr>
+              <td style="width:35%;"></td>
+              <td><input type="submit" value="{% trans "Register My" %}"></td>
+            </tr>
+          </table>
+</form>
+{% endblock %}
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="/user/">{% trans "User Panel" %}</a>{% endblock %}

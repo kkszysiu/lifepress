@@ -1,0 +1,65 @@
+#timeline {
+    height: 400px;
+    margin-top: 10px;
+    padding: 20px;
+    overflow: auto;
+    /*cursor: -moz-grab !important;*/ /* should this be applied with JS? */
+    /*border: 2px solid #D9E4FF;*/
+    border: 1px solid #e5e5e5;
+}
+
+.tl-events {
+    width: 11800px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tl-events li {
+    float: left;
+    width: 300px;
+    margin-right: 10px;
+}
+
+.tl-events ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tl-events li h3 {
+    width: 300px;
+    margin-bottom: 5px;
+    text-shadow:0 2px 2px #BDBDBD;
+    border-bottom: 1px dotted;
+}
+
+.tl-events ul li a {
+    font-size: 10px;
+    text-decoration: none;
+    padding: 2px 8px !important;
+    margin: 2px;
+    cursor: pointer;
+    border: 1px solid #bbb;
+    -moz-border-radius: 11px;
+    -khtml-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    border-radius: 11px;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -khtml-box-sizing: content-box;
+    box-sizing: content-box;
+    color: #464646;
+    text-shadow: rgba(255,255,255,1) 0 1px 0;
+    background: #f2f2f2 url(../site_images/white-grad.png) repeat-x scroll left top;
+}
+
+.tl-events ul li a:active,
+.tl-events ul li a:focus {
+    background: #eee url(../site_images/white-grad.png) repeat-x scroll left bottom;
+}
+
+.tl-events ul li a:hover {
+    border-color:#21759B;
+    color:#000000;
+}

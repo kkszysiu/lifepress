@@ -1,0 +1,43 @@
+{% extends "base_template.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load smart_if %}
+{% load blipify %}
+
+{% block meta %}
+{% endblock %}
+
+{% block title %}Lifepress Platform{% endblock %}
+{% block title2 %}<div class="user_h1">Lifepress Platform</a></div>{% endblock %}
+
+
+{% block item_container %}
+    <div class="normal_block">
+        <p>Welcome to our lifestreaming platform. Lifestreaming is an online record of a person's daily activities, either via direct video feed or via aggregating the person's online content such as blog posts, social network updates, and online photos. There you can start your own adventure with lifestreaming.</p>
+    </div>
+
+    <div class="normal_block">
+        <h3>Newest streams</h3>
+        <div style="margin: 0; padding: 0; text-align: center;">
+            {% for stream in users %}
+                <a href="/user/{{ stream.username }}/" style="box-shadow:0 1px 8px rgba(200, 200, 200, 0.698); -moz-box-shadow:0 1px 8px rgba(200, 200, 200, 0.698); -webkit-box-shadow:0 1px 8px rgba(200, 200, 200, 0.698); -o-box-shadow:0 1px 8px rgba(200, 200, 200, 0.698); height:32px; margin:2px 6px 2px 2px; padding:2px; width:32px;">{% gravatar stream 32 %}</a>
+            {% endfor %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+    {%if user.is_authenticated == False %}
+    <div class="normal_block">
+        <p>Don't wait! <a href="/registration/">register</a> new account or <a href="/login/">login</a> using existing account.</p>
+    </div>
+    {% endif %}
+    {%if user.is_authenticated %}
+    <div class="normal_block">
+        <p>You're logged in so you can check your lifestream clicking <a href="/user/{{ user.username }}/">here</a>.</p>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block nav_container %}
+
+{% endblock %}
